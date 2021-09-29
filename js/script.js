@@ -4,7 +4,8 @@ const quotes = [
         quote: "Don't watch the clock; do what it does. Keep going.",
         source: "Sam Levenson",
         citation: "",
-        year: ""
+        year: "",
+        tags: "humor"
     },
 
     {
@@ -33,6 +34,13 @@ const quotes = [
         source: "Elon Musk",
         citation: "DraperTV",
         year: "2015"
+    },
+
+    {
+        quote: "The way to get started is to quit talking and begin doing.",
+        source: "Walt Disney",
+        citation: "",
+        year: ""
     }
 ];
 
@@ -58,6 +66,10 @@ function printQuote() {
         html += `<span class="year">${randQuote.year}</span>`
     }
 
+    if (randQuote['tags']) {
+        html += `<span class="tags">, ${randQuote.tags}</span>`
+    }
+
     // Closes the paragraph tag
     html += '</p>'
 
@@ -74,4 +86,7 @@ function printQuote() {
 }
 
 // Adds an event listener that listens for button clicks and executes printQuote()
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById('load-quote').addEventListener("click", printQuote);
+
+// Auto refreshes the quote displayed on the page
+setInterval(printQuote, 15000);
