@@ -56,37 +56,39 @@ function printQuote() {
     // Created an html variable which contains the paragraph elements
     let html = `<p class="quote">${randQuote.quote}</p><p class="source">${randQuote.source}`;
 
-    // Checks if the object has a citation property and then prints it to the DOM
-    if (randQuote['citation']) {
-        html += `<span class="citation">${randQuote.citation}</span>`
+    // Created a function that adds spans to the paragraph
+    function getSpan(span) {
+        // Checks if the object has a citation property and then prints it to the DOM
+        if (randQuote[span]) {
+            html += `<span class="${span}">${randQuote[span]}</span>`;
+        }
     }
 
-    // Checks if the object has a year property and then prints it to the DOM
-    if (randQuote['year']) {
-        html += `<span class="year">${randQuote.year}</span>`
-    }
-
-    if (randQuote['tags']) {
-        html += `<span class="tags">, ${randQuote.tags}</span>`
+    // Array containing names of spans
+    const spans = ['citation', 'year', 'tags'];
+    
+    // Created a loop that loops over an array and adding its values as spans to the DOM
+    for (const span of spans) {
+        getSpan(span);
     }
 
     // Closes the paragraph tag
     html += '</p>'
 
     // Display Quotes
-    document.querySelector('.quote-box').innerHTML = html;
+    $('.quote-box').html(html);
 
-    // Created variables that store random rgb values
-    const red = Math.floor(Math.random() * 256) + 1;
-    const green = Math.floor(Math.random() * 256) + 1;
-    const blue = Math.floor(Math.random() * 256) + 1;
+    // Created a function that returns random rgb values
+    function color() {
+        return Math.floor(Math.random() * 256) + 1;
+    }
 
     // Changed the background to the random color
-    document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    $('body').css("background-color", `rgb(${color()}, ${color()}, ${color()})`);
 }
 
 // Adds an event listener that listens for button clicks and executes printQuote()
-document.getElementById('load-quote').addEventListener("click", printQuote);
+$('#load-quote').on("click", printQuote);
 
 // Auto refreshes the quote displayed on the page
 setInterval(printQuote, 15000);
